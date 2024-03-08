@@ -9,6 +9,17 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
+    private var navigator: MainTabBarNavigator
+    
+    init(navigator: MainTabBarNavigator) {
+        self.navigator = navigator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTabBar()
@@ -16,13 +27,15 @@ final class MainTabBarController: UITabBarController {
         view.backgroundColor = .systemBackground
     }
     
+    func loadChildVC() {
+        self.setupTabBar()
+    }
+    
 }
 
 private extension MainTabBarController {
     
     func setupViews() {
-        UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -6)
-        
         TabControl.allCases.forEach {
             UITabBarItem.appearance().setTitleTextAttributes([.foregroundColor: $0.color], for: $0.state)
         }
@@ -44,13 +57,13 @@ private extension MainTabBarController {
     
     func setupTabBar() {
         
-        
         let calculatorNavigator = CalculatorNavigator(navigationController: self.navigationController, presentingController: self)
         let calculatorViewModel = CalculatorViewModel(navigator: calculatorNavigator)
         
         let calculatorViewController = CalculatorViewController(viewModel: calculatorViewModel)
         
-        calculatorViewController.tabBarItem = UITabBarItem(title: "Calculator", image: UIImage(systemName: "drop"), selectedImage: UIImage(systemName: "drop.fill"))
+        let calculatorNC = UINavigationController(rootViewController: calculatorViewController)
+        calculatorNC.tabBarItem = UITabBarItem(title: "Calculator", image: UIImage(systemName: "drop"), selectedImage: UIImage(systemName: "drop.fill"))
         
         
         let settingsNavigator = SettingsNavigator(navigationController: self.navigationController, presentingController: self)
@@ -58,10 +71,12 @@ private extension MainTabBarController {
         
         let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
         
-        settingsViewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), selectedImage: UIImage(systemName: "gear.fill"))
+        let settingsNC = UINavigationController(rootViewController: settingsViewController)
+        
+        settingsNC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), selectedImage: UIImage(systemName: "gear.fill"))
         
         
-        self.viewControllers = [calculatorViewController, settingsViewController]
+        self.viewControllers = [calculatorNC, settingsNC]
         
     }
     

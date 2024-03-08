@@ -34,8 +34,8 @@ extension TabType {
             )
         case .settings:
             return (
-                UIImage(systemName: "gear") ?? UIImage(systemName: "house")!,
-                UIImage(systemName: "gear.fill") ?? UIImage(systemName: "house")!
+                UIImage(systemName: "gear.circle") ?? UIImage(systemName: "house")!,
+                UIImage(systemName: "gear.circle.fill") ?? UIImage(systemName: "house")!
             )
         }
     }

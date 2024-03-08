@@ -10,6 +10,8 @@ import UIKit
 protocol CalculatorNavigatorProtocol {
     
     func toCalculator()
+    func toSettings()
+    func toDetailView()
     
 }
 
@@ -33,6 +35,20 @@ extension CalculatorNavigator: CalculatorNavigatorProtocol {
     func toCalculator() {
         let calculatorViewController = CalculatorViewController(viewModel: CalculatorViewModel(navigator: self))
         self.navigationController?.pushViewController(calculatorViewController, animated: false)
+    }
+    
+    func toSettings() {
+        guard let tabViewController = self.presentingController as? UITabBarController else { return }
+        tabViewController.selectedIndex = 1
+    }
+    
+    func toDetailView() {
+        
+        let calculatorViewModel = CalculatorViewModel(navigator: self)
+        let calculatorDetailViewController = CalculatorDetailViewController(viewModel: calculatorViewModel)
+        
+        self.navigationController?.pushViewController(calculatorDetailViewController, animated: true)
+        
     }
     
 }

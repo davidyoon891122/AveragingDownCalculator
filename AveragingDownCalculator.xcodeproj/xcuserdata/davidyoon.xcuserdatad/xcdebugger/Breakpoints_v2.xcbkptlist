@@ -7,47 +7,62 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E3CFE304-4B11-4A10-9064-0C904A25827B"
+            uuid = "89F7C435-88BE-47D9-9D60-E88A384965A0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AveragingDownCalculator/Scene/MainTabBarController.swift"
+            filePath = "AveragingDownCalculator/Scene/MainTabBarNavigator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "setupViews()"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "toMainTab(_:trainsition:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "E3CFE304-4B11-4A10-9064-0C904A25827B - 11c5a10998561934"
+                  uuid = "89F7C435-88BE-47D9-9D60-E88A384965A0 - dc9562d1b8fc2ebd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Int, __C.UITabBarItem) -&gt; () in AveragingDownCalculator.MainTabBarController.setupViews() -&gt; ()"
+                  symbolName = "closure #2 () -&gt; () in AveragingDownCalculator.MainTabBarNavigator.toMainTab(_: Swift.Optional&lt;AveragingDownCalculator.TabType&gt;, trainsition: Swift.Bool) -&gt; ()"
                   moduleName = "AveragingDownCalculator"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidyoon/iOSProject/AveragingDownCalculator/AveragingDownCalculator/Scene/MainTabBarController.swift"
+                  urlString = "file:///Users/davidyoon/iOSProject/AveragingDownCalculator/AveragingDownCalculator/Scene/MainTabBarNavigator.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "100">
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "0">
                </Location>
                <Location
-                  uuid = "E3CFE304-4B11-4A10-9064-0C904A25827B - 11c5a10998561934"
+                  uuid = "89F7C435-88BE-47D9-9D60-E88A384965A0 - dc9562d1b8fc2ebd"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Int, __C.UITabBarItem) -&gt; () in AveragingDownCalculator.MainTabBarController.setupViews() -&gt; ()"
+                  symbolName = "closure #2 () -&gt; () in AveragingDownCalculator.MainTabBarNavigator.toMainTab(_: Swift.Optional&lt;AveragingDownCalculator.TabType&gt;, trainsition: Swift.Bool) -&gt; ()"
                   moduleName = "AveragingDownCalculator"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidyoon/iOSProject/AveragingDownCalculator/AveragingDownCalculator/Scene/MainTabBarController.swift"
+                  urlString = "file:///Users/davidyoon/iOSProject/AveragingDownCalculator/AveragingDownCalculator/Scene/MainTabBarNavigator.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "37"
-                  endingLineNumber = "37"
-                  offsetFromSymbolStart = "156">
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "89F7C435-88BE-47D9-9D60-E88A384965A0 - dc9562d1b8fc2e9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in AveragingDownCalculator.MainTabBarNavigator.toMainTab(_: Swift.Optional&lt;AveragingDownCalculator.TabType&gt;, trainsition: Swift.Bool) -&gt; ()"
+                  moduleName = "AveragingDownCalculator"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidyoon/iOSProject/AveragingDownCalculator/AveragingDownCalculator/Scene/MainTabBarNavigator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "60">
                </Location>
             </Locations>
          </BreakpointContent>

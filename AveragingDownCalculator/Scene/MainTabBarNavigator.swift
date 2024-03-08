@@ -37,13 +37,31 @@ private extension MainTabBarNavigator {
     func toMainTab(_ tab: TabType?, trainsition: Bool) {
         let window = self.window ?? UIWindow.appWindow
         
+        let completion: ((MainTabBarController?) -> Void) = { vc in
+            if let selectedIndex = tab?.rawValue {
+                vc?.selectedIndex = selectedIndex
+                vc?.loadChildVC()
+            }
+        }
+        
         let currentRootVC = window?.rootViewController
         let currentMainTabVC = (currentRootVC as? UINavigationController)?.topViewController as? MainTabBarController
-        let isMainTabVCNotExit = currentMainTabVC == nil
+        let isMainTabVCNotExist = currentMainTabVC == nil
         
-        if isMainTabVCNotExit || trainsition {
-            let vc = MainTabBarController()
+        if isMainTabVCNotExist || trainsition {
+            let vc = MainTabBarController(navigator: self)
+            let nv = UINavigationController(rootViewController: vc)
+            nv.isNavigationBarHidden = true
             
+            window?.set(newRootViewController: nv)
+        } else {
+            if currentMainTabVC?.presentedViewController != nil {
+                currentMainTabVC?.dismiss(animated: true, completion: {
+                    completion(currentMainTabVC)
+                })
+            } else {
+                completion(currentMainTabVC)
+            }
         }
         
     }

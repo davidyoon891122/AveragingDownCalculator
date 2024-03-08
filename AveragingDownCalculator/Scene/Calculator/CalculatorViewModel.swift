@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 struct CalculatorViewModel {
     
     struct Inputs {
-        
+        let didTapSettingsButton: Signal<Void>
     }
     
     struct Outputs {
-        
+        let events: Signal<Void>
     }
     
     private let navigator: CalculatorNavigatorProtocol
@@ -28,8 +30,14 @@ struct CalculatorViewModel {
 extension CalculatorViewModel {
     
     func bind(_ inputs: Inputs) -> Outputs {
+        let navigator = self.navigator
         
-        return .init()
+        let events = Signal<Void>.merge(
+            inputs.didTapSettingsButton
+            .do(onNext: navigator.toSettings)
+            )
+        
+        return .init(events: events)
     }
     
 }

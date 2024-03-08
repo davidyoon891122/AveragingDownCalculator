@@ -11,7 +11,6 @@ final class SettingsViewController: UIViewController {
     
     private let viewModel: SettingsViewModel
     
-    
     init(viewModel: SettingsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -23,7 +22,7 @@ final class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .orange
+        navigationItem.title = "Settings"
     }
     
 }
