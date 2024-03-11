@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class InputCell: UICollectionViewCell {
     
@@ -144,8 +146,6 @@ final class InputCell: UICollectionViewCell {
             $0.trailing.equalTo(self.buyingAmountTextField)
         }
         
-        
-        
         self.additionalBuyingLabel.snp.makeConstraints {
             $0.top.equalTo(acquisitionCostLabel.snp.bottom).offset(32.0)
             $0.leading.equalToSuperview()
@@ -180,6 +180,8 @@ final class InputCell: UICollectionViewCell {
         return view
     }()
     
+    private var disposeBag = DisposeBag()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupViews()
@@ -187,6 +189,27 @@ final class InputCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.disposeBag = DisposeBag()
+    }
+    
+    var buyingPriceTextFieldEvent: ControlProperty<String?> {
+        self.buyingPriceTextField.rx.text
+    }
+    
+    var buyingAmountTextFieldEvent: ControlProperty<String?> {
+        self.buyingAmountTextField.rx.text
+    }
+    
+    var additionalPriceTextFieldEvent: ControlProperty<String?> {
+        self.additionalBuyingPriceTextField.rx.text
+    }
+    
+    var additionalAmountTextFieldEvent: ControlProperty<String?> {
+        self.additionalBuyingAmountTextField.rx.text
     }
     
 }

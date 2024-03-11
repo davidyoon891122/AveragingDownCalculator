@@ -9,11 +9,15 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
-import Combine
 
-enum CalculatorSectionType {
+enum CalculatorSectionType: CaseIterable {
     case display
     case input
+}
+
+enum CalculatorItem: Hashable {
+    case display(DisplayCellViewModel)
+    case input(InputCellViewModel)
 }
 
 
@@ -23,7 +27,7 @@ final class CalculatorViewController: UIViewController {
     
     private let viewModel: CalculatorViewModel
     
-    private var datasource: UICollectionViewDiffableDataSource<CalculatorSectionType, String>!
+    private var datasource: UICollectionViewDiffableDataSource<CalculatorSectionType, CalculatorItem>!
     
     init(viewModel: CalculatorViewModel) {
         self.viewModel = viewModel
@@ -87,7 +91,8 @@ private extension CalculatorViewController {
     }
     
     func bindViewModel() {
-       
+        
+            
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
@@ -125,14 +130,19 @@ private extension CalculatorViewController {
     
     func configureDatasource() {
         datasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
-            if indexPath.section == 0 {
+            switch item {
+                
+                
+            case .display:
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: CalculatorDisplayCell.identifier,
                     for: indexPath
                 ) as? CalculatorDisplayCell else { return UICollectionViewCell() }
                 
+                
+                
                 return cell
-            } else if indexPath.section == 1 {
+            case .input:
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: InputCell.identifier,
                     for: indexPath
@@ -140,18 +150,16 @@ private extension CalculatorViewController {
                 
                 return cell
             }
-            
-            return UICollectionViewCell()
         })
         
         applySnapshot()
     }
     
     func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<CalculatorSectionType, String>()
-        snapshot.appendSections([.display, .input])
-        snapshot.appendItems(["Item"], toSection: .display)
-        snapshot.appendItems(["top"], toSection: .input)
+        var snapshot = NSDiffableDataSourceSnapshot<CalculatorSectionType, CalculatorItem>()
+        snapshot.appendSections(CalculatorSectionType.allCases)
+        snapshot.appendItems([.display(self.viewModel.getDisplayCellViewModel())], toSection: .display)
+        snapshot.appendItems([.input(self.viewModel.getInputCellViewModel())], toSection: .input)
 
         datasource.apply(snapshot, animatingDifferences: true)
     }

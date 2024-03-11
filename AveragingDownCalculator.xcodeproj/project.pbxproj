@@ -36,6 +36,8 @@
 		ADEC1F612B9EB90500190B17 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F602B9EB90500190B17 /* SeparatorView.swift */; };
 		ADEC1F652B9EBAF200190B17 /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F642B9EBAF200190B17 /* InputCell.swift */; };
 		ADEC1F672B9EBCAA00190B17 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F662B9EBCAA00190B17 /* PaddedTextField.swift */; };
+		ADEC1F722B9EEC7900190B17 /* DisplayCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F712B9EEC7800190B17 /* DisplayCellViewModel.swift */; };
+		ADEC1F742B9EEDCE00190B17 /* InputCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F732B9EEDCE00190B17 /* InputCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		ADEC1F602B9EB90500190B17 /* SeparatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		ADEC1F642B9EBAF200190B17 /* InputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
 		ADEC1F662B9EBCAA00190B17 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
+		ADEC1F712B9EEC7800190B17 /* DisplayCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCellViewModel.swift; sourceTree = "<group>"; };
+		ADEC1F732B9EEDCE00190B17 /* InputCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +202,7 @@
 			children = (
 				ADEC1F592B9E939800190B17 /* CalculatorDisplayCell.swift */,
 				ADEC1F5D2B9E98EB00190B17 /* DisplayTotalTitleValueView.swift */,
+				ADEC1F712B9EEC7800190B17 /* DisplayCellViewModel.swift */,
 			);
 			path = DisplayCell;
 			sourceTree = "<group>";
@@ -206,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				ADEC1F642B9EBAF200190B17 /* InputCell.swift */,
+				ADEC1F732B9EEDCE00190B17 /* InputCellViewModel.swift */,
 			);
 			path = InputCell;
 			sourceTree = "<group>";
@@ -298,9 +304,11 @@
 				AD1D9FBA2B9AD535001C7EB8 /* CalculatorDetailNavigator.swift in Sources */,
 				AD1D9FB52B9AD4C1001C7EB8 /* CalculatorDetailViewController.swift in Sources */,
 				AD1D9FB82B9AD527001C7EB8 /* CalculatorDetailViewModel.swift in Sources */,
+				ADEC1F742B9EEDCE00190B17 /* InputCellViewModel.swift in Sources */,
 				AD1D9F892B997B43001C7EB8 /* MainTabBarController.swift in Sources */,
 				AD013A802B99760500FAA950 /* AppDelegate.swift in Sources */,
 				AD1D9F952B998405001C7EB8 /* Extension+UIWindow.swift in Sources */,
+				ADEC1F722B9EEC7900190B17 /* DisplayCellViewModel.swift in Sources */,
 				AD1D9F872B99797F001C7EB8 /* MainTabBarItem.swift in Sources */,
 				ADEC1F652B9EBAF200190B17 /* InputCell.swift in Sources */,
 				AD1D9F992B9991D0001C7EB8 /* SettingsNavigator.swift in Sources */,
