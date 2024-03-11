@@ -81,3 +81,7 @@ private extension MainTabBarController {
     }
     
 }
+
+#Preview {
+    MainTabBarController(navigator: MainTabBarNavigator(window: UIWindow.appWindow))
+}

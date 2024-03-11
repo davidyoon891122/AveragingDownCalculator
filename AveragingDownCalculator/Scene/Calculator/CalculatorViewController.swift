@@ -11,6 +11,11 @@ import RxSwift
 import RxCocoa
 import Combine
 
+enum CalculatorSectionType {
+    case display
+    case input
+}
+
 
 final class CalculatorViewController: UIViewController {
     
@@ -18,7 +23,7 @@ final class CalculatorViewController: UIViewController {
     
     private let viewModel: CalculatorViewModel
     
-    private var datasource: UICollectionViewDiffableDataSource<Int, String>!
+    private var datasource: UICollectionViewDiffableDataSource<CalculatorSectionType, String>!
     
     init(viewModel: CalculatorViewModel) {
         self.viewModel = viewModel
@@ -36,8 +41,13 @@ final class CalculatorViewController: UIViewController {
         )
         
         collectionView.register(
-            CalculatorTitleCell.self,
-            forCellWithReuseIdentifier: CalculatorTitleCell.identifier
+            CalculatorDisplayCell.self,
+            forCellWithReuseIdentifier: CalculatorDisplayCell.identifier
+        )
+        
+        collectionView.register(
+            InputCell.self,
+            forCellWithReuseIdentifier: InputCell.identifier
         )
         
         return collectionView
@@ -82,13 +92,32 @@ private extension CalculatorViewController {
     
     func createLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout(sectionProvider: { sectionIndex, layoutEnvironment in
-            let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)))
-            
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(100)), subitems: [item])
-            
-            let section = NSCollectionLayoutSection(group: group)
-            
-            return section
+            if sectionIndex == 0 {
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)))
+                
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)), subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)
+                
+                return section
+            } else if sectionIndex == 1 {
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(400)))
+                
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(400)), subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                
+                return section
+            } else {
+                let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(230)))
+                
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(250)), subitems: [item])
+                
+                let section = NSCollectionLayoutSection(group: group)
+                
+                return section
+            }
         })
         
         return layout
@@ -98,9 +127,16 @@ private extension CalculatorViewController {
         datasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             if indexPath.section == 0 {
                 guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: CalculatorTitleCell.identifier,
+                    withReuseIdentifier: CalculatorDisplayCell.identifier,
                     for: indexPath
-                ) as? CalculatorTitleCell else { return UICollectionViewCell() }
+                ) as? CalculatorDisplayCell else { return UICollectionViewCell() }
+                
+                return cell
+            } else if indexPath.section == 1 {
+                guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: InputCell.identifier,
+                    for: indexPath
+                ) as? InputCell else { return UICollectionViewCell() }
                 
                 return cell
             }
@@ -112,10 +148,11 @@ private extension CalculatorViewController {
     }
     
     func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(["Item"])
-        
+        var snapshot = NSDiffableDataSourceSnapshot<CalculatorSectionType, String>()
+        snapshot.appendSections([.display, .input])
+        snapshot.appendItems(["Item"], toSection: .display)
+        snapshot.appendItems(["top"], toSection: .input)
+
         datasource.apply(snapshot, animatingDifferences: true)
     }
     
