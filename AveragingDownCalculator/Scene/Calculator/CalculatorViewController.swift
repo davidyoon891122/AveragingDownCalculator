@@ -20,6 +20,13 @@ enum CalculatorItem: Hashable {
     case input(InputCellViewModel)
 }
 
+struct CalculatorDataItem {
+    
+    let section: CalculatorSectionType
+    let items: [CalculatorItem]
+    
+}
+
 
 final class CalculatorViewController: UIViewController {
     
@@ -91,8 +98,15 @@ private extension CalculatorViewController {
     }
     
     func bindViewModel() {
+        let viewWillAppear = rx.viewWillAppear
+            .asSignal(onErrorSignalWith: .empty())
+            .map { _ in }
         
-            
+        let outputs = self.viewModel.bind(.init(viewWillAppear: viewWillAppear))
+        
+        self.disposeBag.insert(
+            outputs.events.emit()
+        )
     }
     
     func createLayout() -> UICollectionViewCompositionalLayout {
@@ -131,22 +145,22 @@ private extension CalculatorViewController {
     func configureDatasource() {
         datasource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             switch item {
-                
-                
-            case .display:
+            case .display(let displayViewModel):
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: CalculatorDisplayCell.identifier,
                     for: indexPath
                 ) as? CalculatorDisplayCell else { return UICollectionViewCell() }
                 
-                
+                cell.set(displayViewModel)
                 
                 return cell
-            case .input:
+            case .input(let inputViewModel):
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: InputCell.identifier,
                     for: indexPath
                 ) as? InputCell else { return UICollectionViewCell() }
+                
+                cell.set(inputViewModel)
                 
                 return cell
             }
@@ -163,6 +177,10 @@ private extension CalculatorViewController {
 
         datasource.apply(snapshot, animatingDifferences: true)
     }
+    
+}
+
+private extension CalculatorViewController {
     
 }
 

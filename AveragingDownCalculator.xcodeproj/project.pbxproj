@@ -38,6 +38,7 @@
 		ADEC1F672B9EBCAA00190B17 /* PaddedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F662B9EBCAA00190B17 /* PaddedTextField.swift */; };
 		ADEC1F722B9EEC7900190B17 /* DisplayCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F712B9EEC7800190B17 /* DisplayCellViewModel.swift */; };
 		ADEC1F742B9EEDCE00190B17 /* InputCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F732B9EEDCE00190B17 /* InputCellViewModel.swift */; };
+		ADEC1F762B9EF11600190B17 /* Extension+RxSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADEC1F752B9EF11600190B17 /* Extension+RxSwift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		ADEC1F662B9EBCAA00190B17 /* PaddedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddedTextField.swift; sourceTree = "<group>"; };
 		ADEC1F712B9EEC7800190B17 /* DisplayCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayCellViewModel.swift; sourceTree = "<group>"; };
 		ADEC1F732B9EEDCE00190B17 /* InputCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCellViewModel.swift; sourceTree = "<group>"; };
+		ADEC1F752B9EF11600190B17 /* Extension+RxSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+RxSwift.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				AD013A8D2B99760600FAA950 /* Info.plist */,
 				AD1D9F942B998405001C7EB8 /* Extension+UIWindow.swift */,
 				ADEC1F5B2B9E957300190B17 /* PreviewTools.swift */,
+				ADEC1F752B9EF11600190B17 /* Extension+RxSwift.swift */,
 			);
 			path = AveragingDownCalculator;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				AD1D9F8B2B997DD8001C7EB8 /* CalculatorViewController.swift in Sources */,
 				ADEC1F672B9EBCAA00190B17 /* PaddedTextField.swift in Sources */,
 				AD013A822B99760500FAA950 /* SceneDelegate.swift in Sources */,
+				ADEC1F762B9EF11600190B17 /* Extension+RxSwift.swift in Sources */,
 				AD1D9F8D2B998024001C7EB8 /* SettingsViewController.swift in Sources */,
 				AD1D9F932B99818D001C7EB8 /* CalculatorNavigator.swift in Sources */,
 				ADEC1F5C2B9E957300190B17 /* PreviewTools.swift in Sources */,

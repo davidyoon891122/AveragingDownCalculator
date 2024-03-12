@@ -12,7 +12,7 @@ import RxCocoa
 struct CalculatorViewModel {
     
     struct Inputs {
-        let viewWillAppear: Signal<Bool>
+        let viewWillAppear: Signal<Void>
     }
     
     struct Outputs {
@@ -39,18 +39,20 @@ struct CalculatorViewModel {
     
 }
 
-private extension CalculatorViewModel {
+extension CalculatorViewModel {
     
     func bind(_ inputs: Inputs) -> Outputs {
         let navigator = self.navigator
         
         let events = Signal<Void>.merge(
             inputs.viewWillAppear
-                .do(onNext: {
-                    print("viewWillAppear: \($0)")
+                .do(onNext: { _ in
+                    print("viewWillAppear")
                 })
                 .map { _ in }
             )
+        
+        
         
         return .init(events: events)
     }

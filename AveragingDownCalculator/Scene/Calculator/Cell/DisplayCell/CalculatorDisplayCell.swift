@@ -105,6 +105,14 @@ final class CalculatorDisplayCell: UICollectionViewCell {
     
 }
 
+extension CalculatorDisplayCell {
+    
+    func set(_ viewModel: DisplayCellViewModel) {
+        
+    }
+    
+}
+
 private extension CalculatorDisplayCell {
     
     func setupViews() {
@@ -125,10 +133,6 @@ private extension CalculatorDisplayCell {
             $0.centerY.equalToSuperview()
             $0.height.equalTo(230)
         }
-        
-    }
-    
-    func setupCell() {
         
     }
     

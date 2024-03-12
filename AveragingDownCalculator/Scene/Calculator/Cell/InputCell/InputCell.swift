@@ -214,6 +214,48 @@ final class InputCell: UICollectionViewCell {
     
 }
 
+extension InputCell {
+    
+    func set(_ viewModel: InputCellViewModel) {
+        let buyingPriceAcquisitionCost = Observable.combineLatest(self.buyingPriceTextField.rx.text.orEmpty, self.buyingAmountTextField.rx.text.orEmpty)
+            .debug()
+            .map { priceText, amountText -> (Double, Double) in
+                let price = Double(priceText) ?? 0
+                let amount = Double(amountText) ?? 0
+                
+                return (price, amount)
+            }
+            .do(onNext: { [weak self] price, amount in
+                self?.acquisitionCostLabel.text = "\(price * amount)￦"
+            })
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let additionalPriceAcquisitionCost = Observable.combineLatest(self.additionalBuyingPriceTextField.rx.text.orEmpty, self.additionalBuyingAmountTextField.rx.text.orEmpty)
+            .debug()
+            .map { priceText, amountText -> (Double, Double) in
+                let price = Double(priceText) ?? 0
+                let amount = Double(priceText) ?? 0
+                
+                return (price, amount)
+            }
+            .do(onNext: { [weak self] price, amount in
+                self?.additionalAcquisitionCostLabel.text = "\(price * amount)￦"
+            })
+            .asDriver(onErrorDriveWith: .empty())
+        
+        let outputs = viewModel.bind(.init(
+            buyingPriceAcquisitionCost: buyingPriceAcquisitionCost,
+            additionalBuyingPriceAcquisitionCost: additionalPriceAcquisitionCost
+        ))
+        
+        disposeBag.insert(
+            outputs.events.emit()
+        )
+    }
+    
+}
+
+
 private extension InputCell {
     
     func setupViews() {
