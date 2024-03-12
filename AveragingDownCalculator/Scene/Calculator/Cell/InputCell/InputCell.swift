@@ -234,7 +234,7 @@ extension InputCell {
             .debug()
             .map { priceText, amountText -> (Double, Double) in
                 let price = Double(priceText) ?? 0
-                let amount = Double(priceText) ?? 0
+                let amount = Double(amountText) ?? 0
                 
                 return (price, amount)
             }
