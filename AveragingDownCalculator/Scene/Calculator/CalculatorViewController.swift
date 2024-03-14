@@ -39,8 +39,6 @@ final class CalculatorViewController: UIViewController {
     init(viewModel: CalculatorViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        self.bindViewModel()
-        
     }
     
     private lazy var collectionView: UICollectionView = {
@@ -73,6 +71,7 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         configureDatasource()
+        bindViewModel()
     }
     
 }
@@ -105,7 +104,8 @@ private extension CalculatorViewController {
         let outputs = self.viewModel.bind(.init(viewWillAppear: viewWillAppear))
         
         self.disposeBag.insert(
-            outputs.events.emit()
+            outputs.events.emit(),
+            outputs.items.drive(itemBinder)
         )
     }
     
@@ -165,23 +165,25 @@ private extension CalculatorViewController {
                 return cell
             }
         })
-        
-        applySnapshot()
-    }
     
-    func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<CalculatorSectionType, CalculatorItem>()
-        snapshot.appendSections(CalculatorSectionType.allCases)
-        snapshot.appendItems([.display(self.viewModel.getDisplayCellViewModel())], toSection: .display)
-        snapshot.appendItems([.input(self.viewModel.getInputCellViewModel())], toSection: .input)
-
-        datasource.apply(snapshot, animatingDifferences: true)
     }
     
 }
 
 private extension CalculatorViewController {
-    
+    var itemBinder: Binder<[CalculatorDataItem]> {
+        return .init(self) { vc, item in
+            var snapshot = NSDiffableDataSourceSnapshot<CalculatorSectionType, CalculatorItem>()
+            snapshot.appendSections(CalculatorSectionType.allCases)
+            print(item.count)
+            item.forEach {
+                snapshot.appendItems($0.items, toSection: $0.section)
+            }
+            
+            vc.datasource.apply(snapshot, animatingDifferences: true)
+            
+        }
+    }
 }
 
 

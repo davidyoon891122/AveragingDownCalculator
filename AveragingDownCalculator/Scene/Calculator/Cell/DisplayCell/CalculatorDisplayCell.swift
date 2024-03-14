@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class CalculatorDisplayCell: UICollectionViewCell {
     
@@ -94,6 +96,8 @@ final class CalculatorDisplayCell: UICollectionViewCell {
         return view
     }()
     
+    private var disposeBag = DisposeBag()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupViews()
@@ -108,7 +112,11 @@ final class CalculatorDisplayCell: UICollectionViewCell {
 extension CalculatorDisplayCell {
     
     func set(_ viewModel: DisplayCellViewModel) {
+        let outputs = viewModel.bind(.init())
         
+        disposeBag.insert(
+            outputs.items.drive(itemBinder)
+        )
     }
     
 }
@@ -137,6 +145,20 @@ private extension CalculatorDisplayCell {
     }
     
 }
+
+extension CalculatorDisplayCell {
+    
+    var itemBinder: Binder<CalculatorModel> {
+        return .init(self) { cell, item in
+            cell.averagePriceLabel.text = "\(item.averagePrice)"
+            cell.totalPriceView.setValue(value: "\(item.totalPrice)")
+            cell.totalAmountView.setValue(value: "\(item.totalAmount)")
+        }
+    }
+    
+}
+
+
 
 #Preview {
     CalculatorDisplayCell()

@@ -17,25 +17,14 @@ struct CalculatorViewModel {
     
     struct Outputs {
         let events: Signal<Void>
+        let items: Driver<[CalculatorDataItem]>
     }
     
     private let navigator: CalculatorNavigatorProtocol
     
-    private let displayCellViewModel: DisplayCellViewModel = DisplayCellViewModel()
-    private let inputCellViewModel: InputCellViewModel = InputCellViewModel()
-    
     init(navigator: CalculatorNavigatorProtocol) {
         self.navigator = navigator
     }
-    
-    func getDisplayCellViewModel() -> DisplayCellViewModel {
-        self.displayCellViewModel
-    }
-    
-    func getInputCellViewModel() -> InputCellViewModel {
-        self.inputCellViewModel
-    }
-    
     
 }
 
@@ -43,6 +32,15 @@ extension CalculatorViewModel {
     
     func bind(_ inputs: Inputs) -> Outputs {
         let navigator = self.navigator
+        
+        let calculatorModel: CalculatorModel = .init(averagePrice: 0, totalPrice: 0, totalAmount: 0)
+        
+        let itemRelay: BehaviorRelay<CalculatorModel> = .init(value: calculatorModel)
+        
+        let items: BehaviorRelay<[CalculatorDataItem]> = .init(value: [
+            .init(section: .display, items: [.display(.init(calculatorModelRelay: itemRelay))]),
+            .init(section: .input, items: [.input(.init(calculatorModelRelay: itemRelay))])
+        ])
         
         let events = Signal<Void>.merge(
             inputs.viewWillAppear
@@ -53,8 +51,7 @@ extension CalculatorViewModel {
             )
         
         
-        
-        return .init(events: events)
+        return .init(events: events, items: items.asDriver(onErrorDriveWith: .empty()))
     }
     
 }
