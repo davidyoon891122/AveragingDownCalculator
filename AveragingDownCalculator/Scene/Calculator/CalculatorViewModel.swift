@@ -54,4 +54,10 @@ extension CalculatorViewModel {
         return .init(events: events, items: items.asDriver(onErrorDriveWith: .empty()))
     }
     
+    func moveToDetailView() {
+        let navigator = self.navigator
+        
+        navigator.toDetailView()
+    }
+    
 }

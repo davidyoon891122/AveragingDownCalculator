@@ -57,21 +57,23 @@ private extension MainTabBarController {
     
     func setupTabBar() {
         
-        let calculatorNavigator = CalculatorNavigator(navigationController: self.navigationController, presentingController: self)
+        let calculatorNC = UINavigationController()
+        let calculatorNavigator = CalculatorNavigator(navigationController: calculatorNC, presentingController: self)
         let calculatorViewModel = CalculatorViewModel(navigator: calculatorNavigator)
         
         let calculatorViewController = CalculatorViewController(viewModel: calculatorViewModel)
         
-        let calculatorNC = UINavigationController(rootViewController: calculatorViewController)
+        calculatorNC.pushViewController(calculatorViewController, animated: false)
         calculatorNC.tabBarItem = UITabBarItem(title: "Calculator", image: UIImage(systemName: "drop"), selectedImage: UIImage(systemName: "drop.fill"))
         
         
-        let settingsNavigator = SettingsNavigator(navigationController: self.navigationController, presentingController: self)
+        let settingsNC = UINavigationController()
+        let settingsNavigator = SettingsNavigator(navigationController: settingsNC, presentingController: self)
         let settingsViewModel = SettingsViewModel(navigator: settingsNavigator)
         
         let settingsViewController = SettingsViewController(viewModel: settingsViewModel)
         
-        let settingsNC = UINavigationController(rootViewController: settingsViewController)
+        settingsNC.pushViewController(settingsViewController, animated: false)
         
         settingsNC.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), selectedImage: UIImage(systemName: "gear.fill"))
         

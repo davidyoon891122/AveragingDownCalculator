@@ -82,6 +82,8 @@ private extension CalculatorViewController {
         view.backgroundColor = .systemBackground
         self.navigationItem.title = "Calculator"
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hey", style: .plain, target: self, action: #selector(didTapDetailViewButton))
+        
         
         [
             self.collectionView
@@ -166,6 +168,11 @@ private extension CalculatorViewController {
             }
         })
     
+    }
+    
+    @objc
+    func didTapDetailViewButton() {
+        viewModel.moveToDetailView()
     }
     
 }
