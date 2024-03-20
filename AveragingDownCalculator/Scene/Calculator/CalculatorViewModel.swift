@@ -56,7 +56,7 @@ extension CalculatorViewModel {
                 .map { _ in },
             inputs.barButtonItemTapped
                 .do(onNext: {
-                    print("Save")
+                    print("Save: \(itemRelay.value)")
                 })
                 .map { _ in }
             )
