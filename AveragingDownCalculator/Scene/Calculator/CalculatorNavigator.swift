@@ -34,7 +34,7 @@ extension CalculatorNavigator: CalculatorNavigatorProtocol {
     
     func toCalculator() {
         let calculatorViewController = CalculatorViewController(viewModel: CalculatorViewModel(navigator: self))
-        self.navigationController?.pushViewController(calculatorViewController, animated: false)
+        self.navigationController?.pushViewController(calculatorViewController, animated: true)
     }
     
     func toSettings() {

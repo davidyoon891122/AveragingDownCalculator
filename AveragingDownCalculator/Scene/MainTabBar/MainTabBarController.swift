@@ -58,12 +58,13 @@ private extension MainTabBarController {
     func setupTabBar() {
         
         let calculatorNC = UINavigationController()
-        let calculatorNavigator = CalculatorNavigator(navigationController: calculatorNC, presentingController: self)
-        let calculatorViewModel = CalculatorViewModel(navigator: calculatorNavigator)
+        let calculatorNavigator = CalculatorListNavigator(navigationController: calculatorNC, presentingController: self)
+        let calculatorListVM = CalculatorListViewModel(navigator: calculatorNavigator)
         
-        let calculatorViewController = CalculatorViewController(viewModel: calculatorViewModel)
         
-        calculatorNC.pushViewController(calculatorViewController, animated: false)
+        let calculatorListVC = CalculatorListViewController(viewModel: calculatorListVM)
+        
+        calculatorNC.pushViewController(calculatorListVC, animated: false)
         calculatorNC.tabBarItem = UITabBarItem(title: "Calculator", image: UIImage(systemName: "drop"), selectedImage: UIImage(systemName: "drop.fill"))
         
         
