@@ -13,6 +13,7 @@ struct CalculatorViewModel {
     
     struct Inputs {
         let viewWillAppear: Signal<Void>
+        let barButtonItemTapped: Signal<Void>
     }
     
     struct Outputs {
@@ -21,9 +22,14 @@ struct CalculatorViewModel {
     }
     
     private let navigator: CalculatorNavigatorProtocol
+    private let calculatorModel: CalculatorModel
     
-    init(navigator: CalculatorNavigatorProtocol) {
+    init(
+        navigator: CalculatorNavigatorProtocol,
+        calculatorModel: CalculatorModel = .init(averagePrice: 0.0, totalPrice: 0.0, totalAmount: 0.0)
+    ) {
         self.navigator = navigator
+        self.calculatorModel = calculatorModel
     }
     
 }
@@ -33,7 +39,7 @@ extension CalculatorViewModel {
     func bind(_ inputs: Inputs) -> Outputs {
         let navigator = self.navigator
         
-        let calculatorModel: CalculatorModel = .init(averagePrice: 0, totalPrice: 0, totalAmount: 0)
+        let calculatorModel: CalculatorModel = calculatorModel
         
         let itemRelay: BehaviorRelay<CalculatorModel> = .init(value: calculatorModel)
         
@@ -46,6 +52,11 @@ extension CalculatorViewModel {
             inputs.viewWillAppear
                 .do(onNext: { _ in
                     print("viewWillAppear")
+                })
+                .map { _ in },
+            inputs.barButtonItemTapped
+                .do(onNext: {
+                    print("Save")
                 })
                 .map { _ in }
             )

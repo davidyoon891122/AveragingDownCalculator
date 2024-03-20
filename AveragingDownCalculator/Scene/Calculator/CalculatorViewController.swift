@@ -63,6 +63,17 @@ final class CalculatorViewController: UIViewController {
     }()
     
     
+    private lazy var rightBarButton: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(
+            title: "SAVE",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
+        
+        return barButtonItem
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -82,7 +93,7 @@ private extension CalculatorViewController {
         view.backgroundColor = .systemBackground
         self.navigationItem.title = "Calculator"
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Hey", style: .plain, target: self, action: #selector(didTapDetailViewButton))
+        self.navigationItem.rightBarButtonItem = self.rightBarButton
         
         
         [
@@ -103,7 +114,11 @@ private extension CalculatorViewController {
             .asSignal(onErrorSignalWith: .empty())
             .map { _ in }
         
-        let outputs = self.viewModel.bind(.init(viewWillAppear: viewWillAppear))
+        let barButtonItemTapped = rightBarButton.rx.tap
+            .asSignal(onErrorSignalWith: .empty())
+            .map { _ in }
+        
+        let outputs = self.viewModel.bind(.init(viewWillAppear: viewWillAppear, barButtonItemTapped: barButtonItemTapped))
         
         self.disposeBag.insert(
             outputs.events.emit(),
@@ -168,11 +183,6 @@ private extension CalculatorViewController {
             }
         })
     
-    }
-    
-    @objc
-    func didTapDetailViewButton() {
-        viewModel.moveToDetailView()
     }
     
 }

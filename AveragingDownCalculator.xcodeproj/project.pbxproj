@@ -127,10 +127,10 @@
 				AD013A882B99760600FAA950 /* Assets.xcassets */,
 				AD013A8A2B99760600FAA950 /* LaunchScreen.storyboard */,
 				AD013A8D2B99760600FAA950 /* Info.plist */,
+				ADB9A4F62BA27ACF005D38D5 /* CalculatorModel.swift */,
 				AD1D9F942B998405001C7EB8 /* Extension+UIWindow.swift */,
 				ADEC1F5B2B9E957300190B17 /* PreviewTools.swift */,
 				ADEC1F752B9EF11600190B17 /* Extension+RxSwift.swift */,
-				ADB9A4F62BA27ACF005D38D5 /* CalculatorModel.swift */,
 				AD312DA42BAAC18F00C20F95 /* Extension+Double.swift */,
 			);
 			path = AveragingDownCalculator;
@@ -150,9 +150,9 @@
 			children = (
 				ADEC1F622B9EB90C00190B17 /* Subview */,
 				ADEC1F5F2B9EB8F400190B17 /* MainTabBar */,
+				AD312D972BAA955A00C20F95 /* CalculatorList */,
 				AD1D9F8E2B9980D7001C7EB8 /* Calculator */,
 				AD1D9F8F2B9980EC001C7EB8 /* Settings */,
-				AD312D972BAA955A00C20F95 /* CalculatorList */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
