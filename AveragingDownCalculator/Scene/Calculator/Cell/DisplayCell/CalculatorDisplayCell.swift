@@ -150,15 +150,13 @@ extension CalculatorDisplayCell {
     
     var itemBinder: Binder<CalculatorModel> {
         return .init(self) { cell, item in
-            cell.averagePriceLabel.text = "\(item.averagePrice)"
+            cell.averagePriceLabel.text = item.averagePrice.truncateTo(digit: 3)
             cell.totalPriceView.setValue(value: "\(item.totalPrice)")
             cell.totalAmountView.setValue(value: "\(item.totalAmount)")
         }
     }
     
 }
-
-
 
 #Preview {
     CalculatorDisplayCell()

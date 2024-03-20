@@ -196,22 +196,6 @@ final class InputCell: UICollectionViewCell {
         self.disposeBag = DisposeBag()
     }
     
-    var buyingPriceTextFieldEvent: ControlProperty<String?> {
-        self.buyingPriceTextField.rx.text
-    }
-    
-    var buyingAmountTextFieldEvent: ControlProperty<String?> {
-        self.buyingAmountTextField.rx.text
-    }
-    
-    var additionalPriceTextFieldEvent: ControlProperty<String?> {
-        self.additionalBuyingPriceTextField.rx.text
-    }
-    
-    var additionalAmountTextFieldEvent: ControlProperty<String?> {
-        self.additionalBuyingAmountTextField.rx.text
-    }
-    
 }
 
 extension InputCell {
